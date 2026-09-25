@@ -1,0 +1,4 @@
+import PageShell from '../../components/PageShell';
+import PropertyList from '../../components/PropertyList';
+export const metadata={title:'Hotels & Wedding Venues in Agra and Vrindavan | SNJ Group',description:'Explore SNJ Group hotels and wedding venues in Agra and Vrindavan: SNJ Taj Grand, SNJ Laxmi Dham, SNJ Gold Garden and SNJ Pearls Garden.'};
+export default async function Page({searchParams}:{searchParams:Promise<{city?:string}>}){const {city}=await searchParams;const selected=city==='Agra'||city==='Vrindavan'?city:'All destinations';return <PageShell><p className="eyebrow">THE SNJ COLLECTION</p><h1>Hotels &amp; venues in Agra and Vrindavan</h1><p className="page-intro">Explore our hotels and celebration venues in Agra and Vrindavan.</p><PropertyList key={selected} initialCity={selected}/></PageShell>;}

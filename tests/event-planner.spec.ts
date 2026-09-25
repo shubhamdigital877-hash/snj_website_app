@@ -1,0 +1,25 @@
+﻿import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+test.use({ launchOptions: { executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true } });
+test('event planner validates details and downloads a clearly marked draft',async({page})=>{
+ await page.goto('http://127.0.0.1:3000');
+ await page.getByRole('link',{name:'Plan a celebration',exact:true}).click();
+ await page.getByRole('button',{name:'Prepare enquiry',exact:true}).click();
+ await expect(page.locator('.draft-result')).toHaveCount(0);
+ await page.getByLabel('Preferred venue').selectOption('SNJ Gold Garden');
+ await page.getByLabel('Event date').fill('2099-12-10');
+ await page.getByLabel('Expected guests').fill('250');
+ await page.getByLabel('Anything else?').fill('Guest rooms and vegetarian catering');
+ await page.getByRole('button',{name:'Prepare enquiry',exact:true}).click();
+ await expect(page.locator('.draft-result')).toContainText('SNJ Gold Garden');
+ const pending=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Download draft',exact:true}).click();
+ const download=await pending;
+ const body=await readFile((await download.path())!, 'utf8');
+ expect(body).toContain('Guests: 250');expect(body).toContain('not a submitted enquiry');
+ await page.getByLabel('Expected guests').fill('300');
+ await expect(page.locator('.draft-result')).toHaveCount(0);
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
+ await page.screenshot({path:'test-results/event-page-mobile.png',animations:'disabled',fullPage:true});
+});
