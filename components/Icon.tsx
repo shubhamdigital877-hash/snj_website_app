@@ -1,6 +1,11 @@
 import type { CSSProperties } from 'react';
-type IconName = 'arrow' | 'external' | 'chevron' | 'close' | 'menu' | 'pin' | 'sparkle' | 'diamond' | 'calendar' | 'bed' | 'search' | 'smartphone' | 'download' | 'copy' | 'user' | 'suitcase' | 'tag' | 'lock';
+export type IconName = 'arrow' | 'external' | 'chevron' | 'close' | 'menu' | 'pin' | 'sparkle' | 'diamond' | 'calendar' | 'bed' | 'search' | 'smartphone' | 'download' | 'copy' | 'user' | 'suitcase' | 'tag' | 'lock' | 'restaurant' | 'banquet' | 'rooftop' | 'garden' | 'temple';
 const paths: Record<IconName, string> = {
+ restaurant: 'M4 3v6a3 3 0 0 0 6 0V3M7 3v18M17 21V3c-3 2-4 5-4 9h4',
+ banquet: 'M3 21h18M5 21V9h14v12M3 9l9-6 9 6M9 21v-6h6v6M8 12h.01M16 12h.01',
+ rooftop: 'M3 21h18M5 21v-7h14v7M3 14h18M8 14v7M16 14v7M12 14V4M5 8l7-5 7 5H5Z',
+ garden: 'M12 21v-9M8 21h8M12 15C5 15 3 11 3 7c6 0 9 3 9 8ZM12 12c0-5 3-8 9-8 0 5-3 8-9 8Z',
+ temple: 'M3 21h18M5 21V11h14v10M3 11h18L12 5 3 11ZM12 5V2M9 21v-6h6v6',
  user: 'M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2',
  suitcase: 'M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2ZM8 6V3h8v3M8 6v15m8-15v15',
  tag: 'M3 3h8l10 10-8 8L3 11V3Zm4 4h.01',

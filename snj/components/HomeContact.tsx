@@ -1,4 +1,0 @@
-import Link from 'next/link';
-import Icon from './Icon';
-import styles from './SiteFooter.module.css';
-export default function HomeContact(){return <section className={styles.contact} aria-labelledby="contact-heading"><div className={styles.contactHeading}><h2 id="contact-heading">How can we help?</h2><Link href="/contact">Contact &amp; support <Icon name="arrow"/></Link></div><div className={styles.contactGrid}><Link href="/book" className={styles.contactCard}><span className={styles.contactIcon}><Icon name="bed"/></span><div><h3>Plan your stay</h3><p>Explore hotels in Agra and Vrindavan.</p></div><Icon name="arrow"/></Link><Link href="/weddings-events" className={styles.contactCard}><span className={styles.contactIcon}><Icon name="calendar"/></span><div><h3>Plan your event</h3><p>Prepare your wedding or event enquiry.</p></div><Icon name="arrow"/></Link></div></section>;}

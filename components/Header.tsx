@@ -11,10 +11,33 @@ import { properties } from '../lib/properties';
 const links = [['Home', '/'], ['Weddings & events', '/weddings-events'], ['Offers', '/offers'], ['Contact', '/contact']];
 export default function Header() {
     const [login, setLogin] = useState(false); const dialog = useRef<HTMLDialogElement>(null);
-    useEffect(() => { const open = (event: MouseEvent) => { const link = (event.target as HTMLElement).closest('a[href="/login"]'); if (link && !event.ctrlKey && !event.metaKey) { event.preventDefault(); setLogin(true); } }; document.addEventListener('click', open); if (new URLSearchParams(window.location.search).get('login') === '1') { setLogin(true); const url = new URL(window.location.href); url.searchParams.delete('login'); window.history.replaceState(null, '', url.pathname + url.search + url.hash); } return () => document.removeEventListener('click', open); }, []);
+    useEffect(() => {
+        const open = (event: MouseEvent) => {
+            if (!(event.target instanceof Element)) return;
+            const link = event.target.closest<HTMLAnchorElement>('a[href]');
+            if (!link) return;
+            const url = new URL(link.href, window.location.href);
+            if (url.origin !== window.location.origin || url.pathname.replace(/\/$/, '') !== '/login') return;
+            event.preventDefault();
+            setMobile(false);
+            setDropdown(false);
+            setLogin(true);
+        };
+        // Capture before Next Link handles navigation, keeping the current page open.
+        document.addEventListener('click', open, true);
+        return () => document.removeEventListener('click', open, true);
+    }, []);
+
     useEffect(() => { if (!login) return; const previous = document.activeElement as HTMLElement; const overflow = document.body.style.overflow; dialog.current?.showModal(); document.body.style.overflow = 'hidden'; return () => { dialog.current?.close(); document.body.style.overflow = overflow; previous?.focus(); }; }, [login]);
     const path = usePathname(); const [mobile, setMobile] = useState(false); const [dropdown, setDropdown] = useState(false); const [scrolled, setScrolled] = useState(false);
     const drawer = useRef<HTMLDialogElement>(null);
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('login') !== '1') return;
+        setLogin(true);
+        url.searchParams.delete('login');
+        window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash);
+    }, [path]);
     useEffect(() => { if (!mobile) return; const overflow = document.body.style.overflow; drawer.current?.showModal(); document.body.style.overflow = 'hidden'; const media = window.matchMedia('(min-width:961px)'); const resize = () => { if (media.matches) setMobile(false); }; media.addEventListener('change', resize); return () => { drawer.current?.close(); document.body.style.overflow = overflow; toggle.current?.focus(); media.removeEventListener('change', resize); }; }, [mobile]);
     const root = useRef<HTMLElement>(null); const toggle = useRef<HTMLButtonElement>(null); const propertyToggle = useRef<HTMLButtonElement>(null);
     useEffect(() => { setMobile(false); setDropdown(false); }, [path]);

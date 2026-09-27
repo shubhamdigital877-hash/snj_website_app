@@ -1,6 +1,0 @@
-export const properties = [
- {slug:'snj-taj-grand',name:'SNJ Taj Grand',city:'Agra',kind:'Hotel, restaurant & celebrations',description:'Discover SNJ Taj Grand in Agra, bringing together hotel stays, a restaurant, banquet facilities and a rooftop for occasions.',features:['Hotel stays','Restaurant','Banquet','Rooftop','Events'],hotel:true},
- {slug:'snj-laxmi-dham',name:'SNJ Laxmi Dham',city:'Vrindavan',kind:'Spiritual stays & celebrations',description:'A place for your Vrindavan visit, with hotel stays and spaces for weddings, Bhagwat Katha and family occasions.',features:['Hotel stays','Spiritual visits','Weddings','Bhagwat Katha','Events'],hotel:true},
- {slug:'snj-gold-garden',name:'SNJ Gold Garden',city:'Agra',kind:'Wedding lawn, banquet & events',description:'Plan a wedding or special gathering at SNJ Gold Garden in Agra, with lawn and banquet spaces for your occasion.',features:['Wedding lawn','Banquet','Weddings','Events'],hotel:false},
- {slug:'snj-pearls-garden',name:'SNJ Pearls Garden',city:'Agra',kind:'Weddings & special occasions',description:'Explore SNJ Pearls Garden in Agra for weddings, banquets and celebrations with family and friends.',features:['Wedding venue','Banquet','Events','Celebrations'],hotel:false},
-];
